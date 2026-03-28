@@ -1,0 +1,10 @@
+jira:
+  board_url: ""   # Jira 보드 URL (예: https://your-domain.atlassian.net/jira/software/c/projects/EXAMPLE/boards/123?assignee=...)
+
+slack:
+  user_id: ""     # Slack User ID (U로 시작)
+
+schedule:
+  day: "thursday"
+  time: "17:00"
+  timezone: "Asia/Seoul"
