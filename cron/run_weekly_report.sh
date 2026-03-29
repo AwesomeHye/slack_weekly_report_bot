@@ -19,12 +19,20 @@ export PATH="$HOME/.nvm/versions/node/$(ls "$HOME/.nvm/versions/node/" 2>/dev/nu
 
 CLAUDE_BIN="$(which claude)"
 
-# config.yaml에서 board_url의 assignee 파라미터 추출
+# config.yaml에서 board_url의 assignee 파라미터와 project_key 추출
 BOARD_URL=$(grep 'board_url' "$CONFIG_FILE" | sed 's/.*board_url: *"\(.*\)"/\1/')
 ASSIGNEE=$(echo "$BOARD_URL" | sed 's/.*assignee=\([^&"]*\).*/\1/')
+PROJECT_KEY=$(echo "$BOARD_URL" | sed 's|.*/projects/\([^/]*\)/.*|\1|')
+
+# config.yaml에서 cloud_id 추출
+CLOUD_ID=$(grep 'cloud_id' "$CONFIG_FILE" | sed 's/.*cloud_id: *"\(.*\)"/\1/')
 
 # 프롬프트 템플릿에서 플레이스홀더 치환
-PROMPT=$(sed -e "s|{{ASSIGNEE}}|${ASSIGNEE}|g" -e "s|{{PROJECT_DIR}}|${PROJECT_DIR}|g" "$PROMPT_TEMPLATE")
+PROMPT=$(sed -e "s|{{ASSIGNEE}}|${ASSIGNEE}|g" \
+             -e "s|{{PROJECT_DIR}}|${PROJECT_DIR}|g" \
+             -e "s|{{PROJECT_KEY}}|${PROJECT_KEY}|g" \
+             -e "s|{{CLOUD_ID}}|${CLOUD_ID}|g" \
+             "$PROMPT_TEMPLATE")
 
 echo "=== $(date '+%Y-%m-%d %H:%M:%S') 주간 보고 시작 ===" >> "$LOG_FILE"
 
