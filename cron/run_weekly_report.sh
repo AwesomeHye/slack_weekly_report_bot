@@ -28,7 +28,7 @@ PROMPT=$(sed -e "s|{{ASSIGNEE}}|${ASSIGNEE}|g" -e "s|{{PROJECT_DIR}}|${PROJECT_D
 
 echo "=== $(date '+%Y-%m-%d %H:%M:%S') 주간 보고 시작 ===" >> "$LOG_FILE"
 
-echo "$PROMPT" | "$CLAUDE_BIN" --print --allowedTools "mcp__atlassian__searchJiraIssuesUsingJql,mcp__atlassian__getJiraIssue,Bash" \
+echo "$PROMPT" | "$CLAUDE_BIN" --print --dangerously-skip-permissions --allowedTools "mcp__atlassian__searchJiraIssuesUsingJql,mcp__atlassian__getJiraIssue,Bash" \
   >> "$LOG_FILE" 2>&1
 
 echo "=== $(date '+%Y-%m-%d %H:%M:%S') 주간 보고 완료 ===" >> "$LOG_FILE"
