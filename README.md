@@ -16,10 +16,10 @@ Claude Code에서 MCP(Model Context Protocol)를 활용하여 Jira 티켓을 자
 - Atlassian MCP 연결 설정 완료
 - Slack App Bot Token (팀 관리자에게 전달받기)
 
-## 빠른 설치 (권장)
+## 설치
 
 ```bash
-git clone <repo-url>
+git clone https://github.com/AwesomeHye/slack_weekly_report_bot.git
 cd weekly_report_bot
 pip install -r requirements.txt
 ```
