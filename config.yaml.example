@@ -3,8 +3,9 @@ jira:
 
 slack:
   user_id: ""     # Slack User ID (U로 시작)
+  bot_token: ""   # Slack Bot Token (xoxb-로 시작)
 
 schedule:
-  day: "thursday"
-  time: "17:00"
   timezone: "Asia/Seoul"
+  cron_expression: ""      # Schedule_Parser가 자동 생성 (예: "0 15 * * 3")
+  original_input: ""       # 사용자 원본 입력 (예: "매주 수요일 오후 3시")
