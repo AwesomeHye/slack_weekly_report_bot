@@ -44,11 +44,7 @@ except ValueError as e:
 
 ### 3단계: Jira Cloud ID 조회
 
-입력받은 Jira 보드 URL에서 도메인(예: `cloud.jira.woowa.in`)을 추출하고, Atlassian MCP의 `getAccessibleAtlassianResources`를 호출해서 해당 사이트의 cloudId를 조회해:
-
-```
-mcp_atlassian_getAccessibleAtlassianResources
-```
+입력받은 Jira 보드 URL에서 도메인(예: `cloud.jira.woowa.in`)을 추출하고, Atlassian MCP로 접근 가능한 리소스 목록을 조회해서 해당 사이트의 cloudId를 찾아.
 
 응답에서 URL 도메인과 매칭되는 리소스의 `id` 값이 cloudId야.
 
