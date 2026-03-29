@@ -91,7 +91,7 @@ from src.config_manager import ConfigManager
 config = ConfigManager('config.yaml').load()
 print(f'Jira 보드: {config.jira_board_url}')
 print(f'Slack User: {config.slack_user_id}')
-print(f'스케줄: {config.schedule_cron_expression}')
+print(f'스케줄: 매주 {config.schedule_day} {config.schedule_time} ({config.timezone})')
 print('설정 검증 완료!')
 "
 ```
