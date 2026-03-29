@@ -42,13 +42,24 @@ except ValueError as e:
 
 파싱 실패 시 에러 메시지를 보여주고 다시 입력받아.
 
-### 3단계: config.yaml 생성
+### 3단계: Jira Cloud ID 조회
 
-입력받은 값과 파싱된 스케줄로 프로젝트 루트에 `config.yaml`을 생성해:
+입력받은 Jira 보드 URL에서 도메인(예: `cloud.jira.woowa.in`)을 추출하고, Atlassian MCP의 `getAccessibleAtlassianResources`를 호출해서 해당 사이트의 cloudId를 조회해:
+
+```
+mcp_atlassian_getAccessibleAtlassianResources
+```
+
+응답에서 URL 도메인과 매칭되는 리소스의 `id` 값이 cloudId야.
+
+### 4단계: config.yaml 생성
+
+입력받은 값과 파싱된 스케줄, 조회한 cloudId로 프로젝트 루트에 `config.yaml`을 생성해:
 
 ```yaml
 jira:
   board_url: "<입력받은 Jira 보드 URL>"
+  cloud_id: "<조회한 Jira Cloud ID>"
 
 slack:
   user_id: "<입력받은 Slack User ID>"
@@ -60,13 +71,13 @@ schedule:
   original_input: "<사용자가 입력한 원본 스케줄>"
 ```
 
-### 4단계: 실행 권한 부여
+### 5단계: 실행 권한 부여
 
 ```bash
 chmod +x cron/run_weekly_report.sh
 ```
 
-### 5단계: crontab 등록
+### 6단계: crontab 등록
 
 기존에 `run_weekly_report.sh`가 등록되어 있으면 제거하고, 파싱된 크론 표현식으로 새로 등록해:
 
@@ -81,7 +92,7 @@ chmod +x cron/run_weekly_report.sh
 
 등록 후 `crontab -l`로 확인해서 결과를 보여줘.
 
-### 6단계: 설정 검증
+### 7단계: 설정 검증
 
 프로젝트 루트에서 실행:
 
